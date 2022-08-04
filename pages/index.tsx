@@ -8,6 +8,8 @@ import { Prisma, Role } from '@prisma/client'
 import { Button, Container, Divider, Form, Header, Icon, Image, Table } from 'semantic-ui-react'
 import pkg from 'semantic-ui-react/package.json'
 
+import prisma from '../lib/prisma'
+
 import { fetcher } from '../utils/fetcher'
 
 export async function getServerSideProps() {
