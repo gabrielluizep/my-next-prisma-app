@@ -3,16 +3,16 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import { useState } from 'react'
 
-import { Prisma, Role } from '@prisma/client'
+import { Prisma, PrismaClient, Role } from '@prisma/client'
 
 import { Button, Container, Divider, Form, Header, Icon, Image, Table } from 'semantic-ui-react'
 import pkg from 'semantic-ui-react/package.json'
 
-import prisma from '../lib/prisma'
-
 import { fetcher } from '../utils/fetcher'
 
 export async function getServerSideProps() {
+  const prisma = new PrismaClient()
+
   const users: Prisma.UserUncheckedCreateInput[] = await prisma.user.findMany()
 
   return {

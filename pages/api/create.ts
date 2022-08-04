@@ -1,8 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { Prisma, User } from '@prisma/client'
+import { Prisma, PrismaClient, User } from '@prisma/client'
 import type { NextApiRequest, NextApiResponse } from 'next'
-
-import prisma from '../../lib/prisma'
 
 type Error = {
   message: string
@@ -10,6 +8,8 @@ type Error = {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<User | Error>) {
   if (req.method !== 'POST') return res.status(405).json({ message: 'Method Not Allowed' })
+
+  const prisma = new PrismaClient()
 
   try {
     const { user } = req.body
